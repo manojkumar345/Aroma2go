@@ -1,0 +1,240 @@
+import time
+
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support.select import Select
+from selenium.webdriver import ActionChains
+
+
+driver = webdriver.Chrome(executable_path="C:\drivers\chromedriver_win32\chromedriver.exe")
+
+driver.get("https://aroma2go.com/")
+driver.maximize_window()
+time.sleep(1)
+driver.find_element_by_xpath("//*[@id='newspopup_up_bg_1']/div[2]/div[2]/div[1]").click()
+print("Test Cases")
+
+#Test Case-1 : Checking for logo of the webpage
+print("Test Case 1:")
+time.sleep(2)
+logo = driver.find_element_by_xpath("/html/body/div[4]/header/div[2]/div/strong/img")
+if logo.is_displayed():
+    print("Successful : Logo is Present")
+    time.sleep(2)
+else:
+    print("Logo is not visible!!")
+
+#Test Case-2 : Checking for parameter 'nav'
+print("TestCase 2:")
+time.sleep(2)
+try:
+    driver.find_element_by_xpath("/html/body/div[4]/header/div[2]/div")
+    print("Verification of navigation bar has been done successfully")
+except NoSuchElementException:
+    print("Failed in Verifying of navigation bar")
+
+#Test Case-3 : Checking for HOME
+print("TestCase 3:")
+time.sleep(2)
+try:
+    driver.find_element_by_xpath("//*[@id='store.menu']/nav/ul/li[1]/a").click()
+    print("home page is working successful")
+except NoSuchElementException:
+    print("home page link is not working!")
+
+#Test Case-4 : Checking for parameter title
+print("TestCase 4:")
+time.sleep(2)
+if driver.title:
+    print("title has been verified successfully:",driver.title)
+else:
+    print("Title verification failed!")
+
+#Test Case-5 : Checking for "new"
+print("TestCase 5:")
+time.sleep(2)
+try:
+    driver.find_element_by_xpath("//*[@id='store.menu']/nav/ul/li[3]/a").click()
+    print("new page is working successful")
+except NoSuchElementException:
+    print("new page link is not working!")
+
+#Test Case-6 : Checking for "learn - Reviews"
+print("TestCase 6:")
+time.sleep(2)
+try:
+    first = driver.find_element_by_xpath("//*[@id='store.menu']/nav/ul/li[4]/a")
+    second = driver.find_element_by_xpath("//*[@id='store.menu']/nav/ul/li[4]/div[2]/div/ul/li[1]/a")
+    actions1 = ActionChains(driver)
+    actions1.move_to_element(first).move_to_element(second).click().perform()
+    time.sleep(2)
+    print("Reviews page is working successful")
+except NoSuchElementException:
+    print("Reviews page link is not working!")
+
+#Test Case-7 : Checking for "learn - warrenty information"
+print("TestCase 7:")
+time.sleep(2)
+try:
+    first = driver.find_element_by_xpath("//*[@id='store.menu']/nav/ul/li[4]/a")
+    second = driver.find_element_by_xpath("//*[@id='store.menu']/nav/ul/li[4]/div[2]/div/ul/li[2]/a")
+    actions2 = ActionChains(driver)
+    actions2.move_to_element(first).move_to_element(second).click().perform()
+    time.sleep(2)
+    print("warrenty information page is working successful")
+except NoSuchElementException:
+    print("warrenty information page link is not working!")
+
+#Test Case-8 : Checking for "About - About Us"
+print("TestCase 8:")
+time.sleep(2)
+try:
+    first = driver.find_element_by_xpath("//*[@id='store.menu']/nav/ul/li[5]/a")
+    second = driver.find_element_by_xpath("//*[@id='store.menu']/nav/ul/li[5]/div[2]/div/ul/li[1]/a")
+    actions3 = ActionChains(driver)
+    actions3.move_to_element(first).move_to_element(second).click().perform()
+    time.sleep(2)
+    print("About Us page is working successful")
+except NoSuchElementException:
+    print("About Us page link is not working!")
+
+#Test Case-9 : Checking for "Account"
+print("TestCase 9:")
+time.sleep(2)
+
+first = driver.find_element_by_xpath("//*[@id='store.menu']/nav/ul/li[5]/a")
+second = driver.find_element_by_xpath("//*[@id='store.menu']/nav/ul/li[5]/div[2]/div/ul/li[2]/a")
+actions4 = ActionChains(driver)
+actions4.move_to_element(first).move_to_element(second).click().perform()
+time.sleep(2)
+print("Affiliate page is working successful")
+
+#Test Case-10 : Checking for "Account"
+print("TestCase 10:")
+time.sleep(2)
+link1 = driver.find_element_by_xpath("/html/body/div[3]/footer/div/div[2]/div/div[2]/div[1]/div/div/div[2]/div[2]/ul/li[1]")
+driver.execute_script("arguments[0].scrollIntoView();",link1)
+print("scrolling page is working successful")
+
+
+#Test Case-11 : Checking for "About-Privacy policy"
+print("TestCase 11:")
+time.sleep(2)
+try:
+    first = driver.find_element_by_xpath("//*[@id='store.menu']/nav/ul/li[5]/a")
+    second = driver.find_element_by_xpath("//*[@id='store.menu']/nav/ul/li[5]/div[2]/div/ul/li[3]/a")
+    actions5 = ActionChains(driver)
+    actions5.move_to_element(first).move_to_element(second).click().perform()
+    time.sleep(2)
+    print("Privacy policy page is working successful")
+except NoSuchElementException:
+    print("Privacy policy page link is not working!")
+
+#Test Case-12 : Checking for "About-Troubleshooting"
+print("TestCase 12:")
+time.sleep(2)
+try:
+    first = driver.find_element_by_xpath("//*[@id='store.menu']/nav/ul/li[5]/a")
+    second = driver.find_element_by_xpath("//*[@id='store.menu']/nav/ul/li[5]/div[2]/div/ul/li[4]/a")
+    actions6 = ActionChains(driver)
+    actions6.move_to_element(first).move_to_element(second).click().perform()
+    time.sleep(2)
+    print("Troubleshooting page is working successful")
+except NoSuchElementException:
+    print("Troubleshooting page link is not working!")
+
+#Test Case-13 : Checking for "About-Contact US"
+print("TestCase 13:")
+time.sleep(2)
+try:
+    first = driver.find_element_by_xpath("//*[@id='store.menu']/nav/ul/li[5]/a")
+    second = driver.find_element_by_xpath("//*[@id='store.menu']/nav/ul/li[5]/div[2]/div/ul/li[7]/a")
+    actions7 = ActionChains(driver)
+    actions7.move_to_element(first).move_to_element(second).click().perform()
+    time.sleep(2)
+    print("Contact US page is working successful")
+except NoSuchElementException:
+
+#Test Case-14 : Checking for "Shop-Singles"
+print("TestCase 14:")
+time.sleep(2)
+try:
+    first = driver.find_element_by_xpath("//*[@id='store.menu']/nav/ul/li[2]/a")
+    second = driver.find_element_by_xpath("//*[@id='store.menu']/nav/ul/li[2]/div[2]/div/div/ul/li[1]/ul/li[1]/a")
+    actions7 = ActionChains(driver)
+    actions7.move_to_element(first).move_to_element(second).click().perform()
+    time.sleep(2)
+    print("Singles page is working successful")
+except NoSuchElementException:
+    print("Singles page link is not working!")
+
+#Test Case-15 : Checking for "Shop-Singles-Basil Essential Oil"
+print("TestCase 15:")
+time.sleep(2)
+driver.find_element_by_xpath("//*[@id='product_container_820']/div[1]/a").click()
+Size = driver.find_element_by_id("select_181")
+dropdown = Select(Size)
+dropdown.select_by_index(2)
+time.sleep(5)
+add_to_cart = driver.find_element_by_id("product-addtocart-button")
+time.sleep(2)
+add_to_cart.click()
+print("Add to cart page is working successful")
+
+#Test Case-16 : Checking for "Add TO Cart items"
+print("TestCase 16:")
+time.sleep(2)
+add_to_cart_items= driver.find_element_by_xpath("/html/body/div[3]/header/div[2]/div/div[1]/a")
+add_to_cart_items.click()
+time.sleep(2)
+view_cart = driver.find_element_by_xpath("//*[@id='minicart-content-wrapper']/div[2]/div[4]/div/a")
+view_cart.click()
+print("view cart page is working successful")
+
+#Test Case-17 : Checking for "Summery"
+print("TestCase 17:")
+time.sleep(2)
+link2 = driver.find_element_by_xpath("//*[@id='shopping-cart-totals-table']/tfoot/tr/td/strong/span")
+driver.execute_script("arguments[0].scrollIntoView();",link2)
+Estimated_Total = driver.find_element_by_xpath("//*[@id='shopping-cart-totals-table']/tfoot/tr/td/strong/span")
+print(Estimated_Total.text)
+
+#Test Case-18 : Checking for "learn-Quality control"
+print("TestCase 18:")
+time.sleep(5)
+try:
+    first = driver.find_element_by_xpath("//*[@id='store.menu']/nav/ul/li[4]/a")
+    second = driver.find_element_by_xpath("//*[@id='store.menu']/nav/ul/li[4]/div[2]/div/ul/li[6]/a")
+    actions8 = ActionChains(driver)
+    actions8.move_to_element(first).move_to_element(second).click().perform()
+    time.sleep(2)
+    print("Quality control page is working successful")
+except NoSuchElementException:
+    print("Quality control page link is not working!")
+
+#Test Case-19 : Checking for "learn-shipping"
+print("TestCase 19:")
+time.sleep(5)
+try:
+    first = driver.find_element_by_xpath("//*[@id='store.menu']/nav/ul/li[4]/a")
+    second = driver.find_element_by_xpath("//*[@id='store.menu']/nav/ul/li[4]/div[2]/div/ul/li[7]/a")
+    actions9 = ActionChains(driver)
+    actions9.move_to_element(first).move_to_element(second).click().perform()
+    time.sleep(2)
+    print("shipping page is working successful")
+except NoSuchElementException:
+    print("shipping page link is not working!")
+
+#Test Case-20 : Checking for "learn-request RMA"
+print("TestCase 20:")
+time.sleep(5)
+try:
+    first = driver.find_element_by_xpath("//*[@id='store.menu']/nav/ul/li[4]/a")
+    second = driver.find_element_by_xpath("//*[@id='store.menu']/nav/ul/li[4]/div[2]/div/ul/li[8]/a")
+    actions9 = ActionChains(driver)
+    actions9.move_to_element(first).move_to_element(second).click().perform()
+    time.sleep(2)
+    print("request RMA page is working successful")
+except NoSuchElementException:
+    print("request RMA page link is not working!")
