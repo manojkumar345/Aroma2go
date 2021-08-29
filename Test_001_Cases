@@ -1,0 +1,214 @@
+import time
+
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support.select import Select
+from selenium.webdriver import ActionChains
+
+driver = webdriver.Chrome(executable_path="C:\drivers\chromedriver_win32\chromedriver.exe")
+
+driver.get("https://aroma2go.com/")
+driver.implicitly_wait(5)
+time.sleep(2)
+driver.find_element_by_xpath("//*[@id='newspopup_up_bg_1']/div[2]/div[2]/div[1]").click()
+print("Test Cases")
+
+
+#---------------------------------------------Product listing Page--------------------------------------------
+
+#Test Case-1 : Checking for "Shop-Accessories"
+print("TestCase 1:")
+time.sleep(2)
+try:
+    first = driver.find_element_by_xpath("//*[@id='store.menu']/nav/ul/li[2]/a")
+    second = driver.find_element_by_xpath("//*[@id='store.menu']/nav/ul/li[2]/div[2]/div/div/ul/li[2]/ul/li[1]/a")
+    actions1 = ActionChains(driver)
+    actions1.move_to_element(first).move_to_element(second).click().perform()
+    time.sleep(2)
+    print("Singles page is working successful")
+except NoSuchElementException:
+    print("Singles page link is not working!")
+
+#Test Case-2 : Checking for "Shop-accessories-EO Business Material"
+print("TestCase 2:")
+time.sleep(2)
+link1 = driver.find_element_by_xpath("//*[@id='product_container_769']/div[2]/strong/a")
+driver.execute_script("arguments[0].scrollIntoView();",link1)
+time.sleep(2)
+driver.find_element_by_xpath("//*[@id='product_container_769']/div[1]").click()
+time.sleep(2)
+print("product selected successfull")
+
+#------------------------------------------PRODUCT DETAILS PAGE---------------------------------
+#Test Case3 : Checking for PRODUCT DETAILS PAGE - Shop-accessories-EO Business Material
+print("TestCase 3:")
+time.sleep(2)
+#review the product
+driver.find_element_by_id("click-me").click()
+time.sleep(5)
+rating = driver.find_element_by_id("Overall_Rating_1_label")
+rating.click()
+time.sleep(2)
+review_title = driver.find_element_by_id("summary_field")
+review_title.send_keys("gjhgkjhgjg")
+time.sleep(2)
+review_meassage = driver.find_element_by_id("review_field")
+review_meassage.send_keys("its a good product")
+time.sleep(2)
+nick_name = driver.find_element_by_id("nickname_field")
+nick_name.send_keys("afefwef")
+time.sleep(2)
+link = driver.find_element_by_id("email_field")
+driver.execute_script("arguments[0].scrollIntoView();",link)
+time.sleep(2)
+email_feild = driver.find_element_by_id("email_field")
+email_feild.send_keys("harleymanoj@gmail.com")
+time.sleep(5)
+driver.find_element_by_xpath("//*[@id='first_qs_field_no']").click()
+time.sleep(2)
+driver.find_element_by_xpath("//*[@id='review-form']/div[2]/div/button").click()
+print("review product successful")
+
+#Add to Cart product
+print("TestCase 4:")
+time.sleep(2)
+add_to_cart = driver.find_element_by_id("product-addtocart-button")
+time.sleep(2)
+add_to_cart.click()
+print("Add to cart successful")
+
+#product details
+time.sleep(2)
+link1 = driver.find_element_by_xpath("//*[@id='tab-label-description-title']")
+driver.execute_script("arguments[0].scrollIntoView();",link1)
+print("Details of Product successful")
+
+#--------------------------------------------------ADD TO CART PAGE----------------------------------------------------
+
+#Test Case-5 : Checking for "Add TO Cart items"
+print("TestCase 5:")
+time.sleep(2)
+add_to_cart_items= driver.find_element_by_xpath("/html/body/div[3]/header/div[2]/div/div[1]/a")
+add_to_cart_items.click()
+time.sleep(5)
+view_cart = driver.find_element_by_xpath("//*[@id='minicart-content-wrapper']/div[2]/div[4]/div/a")
+view_cart.click()
+print("view cart page is working successful")
+
+#cart page
+print("TestCase 6:")
+time.sleep(2)
+driver.find_element_by_xpath("//*[@id='shopping-cart-table']/tbody/tr[1]/td[3]/div/div[2]/a[1]").click()
+time.sleep(2)
+update_cart = driver.find_element_by_id("cus-cart-update").click()
+time.sleep(2)
+link2 = driver.find_element_by_xpath("//*[@id='form-validate']/div[2]/a[1]")
+driver.execute_script("arguments[0].scrollIntoView();",link2)
+time.sleep(2)
+discount_code = driver.find_element_by_id("coupon_code")
+discount_code.send_keys("coupon123")
+time.sleep(2)
+driver.find_element_by_xpath("//*[@id='discount-coupon-form']/div/div[2]/div/button").click()
+print("Cart details successful")
+
+#-------------------------------------------------CHECKOUT PAGE----------------------------------------------
+#Test Case-7 : Go to checkout page
+print("TestCase 7:")
+time.sleep(2)
+try:
+    link4 = driver.find_element_by_xpath("//*[@id='maincontent']/div[3]/div/div[2]/div[2]/strong")
+    driver.execute_script("arguments[0].scrollIntoView();",link4)
+    driver.find_element_by_xpath("//*[@id='maincontent']/div[3]/div/div[2]/div[2]/ul/li/button").click()
+    time.sleep(2)
+    first_name = driver.find_element_by_id("firstname")
+    first_name.send_keys('abcafsfkj')
+    time.sleep(2)
+    last_name = driver.find_element_by_id("lastname")
+    last_name.send_keys('fkjflhlkq')
+    time.sleep(2)
+    email = driver.find_element_by_id("email_address")
+    email.send_keys("abcdef@gmail.com")
+    time.sleep(2)
+    driver.find_element_by_id("password").send_keys("uhhaklbdka")
+    time.sleep(2)
+    driver.find_element_by_id("password-confirmation").send_keys("uhhaklbdka")
+    driver.find_element_by_xpath("//*[@id='custom-register-form']/div[8]/button").click()
+    print("register block successful")
+except NoSuchElementException:
+    print("register block Unsuccessful")
+time.sleep(5)
+#login click
+#Test Case-8 : Go to LOGIN page
+print("TestCase 8:")
+try:
+    login_click = driver.find_element_by_xpath("//*[@id='checkout-step-title']/div/div/div[1]/div[2]").click()
+    time.sleep(2)
+    enter_email = driver.find_element_by_id("cust-customer-email")
+    enter_email.send_keys("harleymanoj@gamail.com")
+    time.sleep(2)
+    enter_password = driver.find_element_by_id("cust-customer-password")
+    enter_password.send_keys("manoj@12345")
+    time.sleep(5)
+    butn_click = driver.find_element_by_xpath("//*[@id='checkout-step-title']/form/div/div/button")
+    butn_click.click()
+    print("Login Successful")
+except NoSuchElementException:
+    print("Login Un-successful")
+
+#shipping information
+time.sleep(3)
+print("TestCase 9:")
+email_01 = driver.find_element_by_id("customer-email")
+email_01.send_keys("harleymanoj@gmail.com")
+time.sleep(2)
+password_01= driver.find_element_by_id("customer-password")
+password_01.send_keys("manoj@12345")
+time.sleep(2)
+driver.find_element_by_xpath("//*[@id='customer-email-fieldset']/fieldset/div[2]/div[1]/button").click()
+time.sleep(5)
+company = driver.find_element_by_id("CVYW7HY")
+company.send_keys("kgadadak")
+time.sleep(2)
+street_add = driver.find_element_by_id("OPE2CSE")
+street_add.send_keys("texas,united states")
+time.sleep(2)
+city = driver.find_element_by_id("Q7IGADI")
+city.send_keys("texas")
+time.sleep(2)
+state = driver.find_element_by_id("select_181")
+dropdown = Select(state)
+dropdown.select_by_index(57)
+time.sleep(2)
+zip_code = driver.find_element_by_id("OYGJY2I")
+zip_code.send_keys("77494")
+time.sleep(2)
+phone_no = driver.find_element_by_id("SWCHBLV")
+phone_no.send_keys("1234567890")
+time.sleep(2)
+link6 = driver.find_element_by_xpath("//*[@id='checkout-shipping-method-load']/table/tbody/tr[2]/td[1]/input")
+driver.execute_script("arguments[0].scrollIntoView();",link6)
+time.sleep(2)
+driver.find_element_by_xpath("//*[@id='shipping-method-buttons-container']/div/button").click()
+print("shipping details successfull")
+
+#Payment method
+print("TestCase 10:")
+time.sleep(3)
+try:
+    driver.find_element_by_id("authorizenet_acceptjs").click()
+    credit_card_no = driver.find_element_by_id("authorizenet_acceptjs_cc_number")
+    month = driver.find_element_by_id("authorizenet_acceptjs_expiration")
+    dropdown1 = Select(month)
+    dropdown1.select_by_index(5)
+    time.sleep(3)
+    year = driver.find_element_by_id("authorizenet_acceptjs_expiration_yr")
+    dropdown2 = Select(year)
+    dropdown2.select_by_index(5)
+    time.sleep(3)
+    driver.find_element_by_id("authorizenet_acceptjs_cc_cid").send_keys("123")
+    time.sleep(3)
+    driver.find_element_by_xpath("//*[@id='checkout-payment-method-load']/div/div/div[2]/div[2]/div[4]/div/button").click()
+    print("Place Order Successful")
+except NoSuchElementException:
+    print("Place Order Un-Successful")
